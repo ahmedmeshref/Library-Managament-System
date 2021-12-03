@@ -1,4 +1,4 @@
-# Quick S
+# Quick Setup
 
 - Clone the repository.
 

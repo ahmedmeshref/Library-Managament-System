@@ -1,7 +1,7 @@
-{% extends 'librarian_base.html' %}
-{% block title %}Remove Book{% endblock %}
+{% extends 'admin_base.html' %}
+{% block title %}Remove User{% endblock %}
 {% block content %} 
-<form class='text-center mt-5 container' style="width: 60%;" action='/remove/book' method='POST'>
+<form class='text-center mt-5 container' style="width: 60%;" action='/remove/user' method='POST'>
     <div class="col-md-13">
         {% with messages = get_flashed_messages(with_categories = true) %}
         {% if messages %}
@@ -14,14 +14,14 @@
         {% endif %}
         {% endwith %}
     </div>
-     <h1 class='display-4 text-center'>Remove Book</h1><br>
+     <h1 class='display-4 text-center'>Remove User</h1><br>
      <div class="input-group mb-3">
           <div class="input-group-prepend">
-              <span class="input-group-text"><i class="fa fa-book"></i></span>
+              <span class="input-group-text"><i class="fa fa-user"></i></span>
           </div>
-          <select name="book" class="form-control" required autofocus placeholder='Select'>
-              {% for book in books %}
-              <option value='{{ book.id }}' name='book'>{{ book.name }} by {{ book.author }}</option>
+          <select name="user" class="form-control" required autofocus placeholder='Select'>
+              {% for user in users %}
+              <option value='{{ user.id }}' name='user'>{{ user.email }} ({{ user.name }})</option>
               {% endfor %}
           </select>
       </div>
