@@ -1,0 +1,45 @@
+{% extends 'librarian_base.html' %}
+{% block title %}Librarian Dashboard{% endblock %}
+{% block content %}
+
+{% for message in get_flashed_messages() %}
+
+<div class='alert alert-warning'>
+     <button type='button' class='close' data-dismiss='alert'>&times;</button>
+     {{message}}
+</div>
+
+
+{% endfor %}
+{% if books %}
+
+<div class=' text-center container-fluid'>
+
+     <h1 class='display-4 text-center mt-4'>All Books</h1><br>
+     <table class="table" style="color: #fff; background-color: rgb(105, 68, 68); box-shadow: #f1f1f1 0px 3px 8px;" id='data'>
+          <thead>
+               <th scope="col">#</th>
+               <th scope="col">Title</th>
+               <th scope="col">Author</th>
+               <th scope="col">Description</th>
+               <th scope="col">Total Copies</th>
+               <th scope="col">Copies Avaliable</th>
+          </thead>
+          <tbody>
+               {% for book in books %}
+               <tr>
+                    <td scope='row'>{{ book.id }}</td>
+                    <td>{{ book.name }}</td>
+                    <td>{{ book.author }}</td>
+                    <td>{{ book.description }}</td>
+                    <td>{{ book.total_quantity }}</td>
+                    <td>{{ book.available_quantity }}</td>
+               </tr>
+               {% endfor %}
+          </tbody>
+     </table>
+</div>
+{% else %}
+<h1 class='display-4 text-center'>No Books Found!</h1><br>
+{% endif %}
+{% endblock %}

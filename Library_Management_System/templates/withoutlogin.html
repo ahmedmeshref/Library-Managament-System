@@ -15,14 +15,15 @@
 
 </head>
 
-<body
-    style="font-family: 'PT Sans', sans-serif;background-image: url(../static/bk.jpg);background-size: cover;">
-    <nav class='navbar navbar-expand-lg navbar-dark' style="background-color: rgb(105, 68, 68);">
+<body style="font-family: 'PT Sans', sans-serif;background-image: url(../static/bk.jpg);background-size: cover;">
+    <nav class="navbar navbar-expand-md navbar-dark" style="background-color: rgb(105, 68, 68); margin-bottom: 10px;">
 
         <div class='container-fluid' id='navbarNav'>
             <ul class='nav navbar-nav navbar-brand'>
                 <li class='nav-item'>
-                    <a class='navbar-brand' href='/'><img src="{{ url_for('static',filename='alu_logo.png') }}" alt="" height="20px"></a>
+                    <a class='navbar-brand' href="{{ url_for('main.admin_dashboard') }}"><img
+                            src="{{ url_for('static',filename='alu_logo.png')}}" alt="alu logo" height="21px"> Librarian
+                        - {{ current_user.name }}</a>
                 </li>
             </ul>
             <ul class='nav navbar-nav ml-auto'>

@@ -1,4 +1,4 @@
-{% extends 'admin_layout.html' %}
+{% extends 'librarian_base.html' %}
 {% block title %}Remove Book{% endblock %}
 {% block content %} 
 <form class='text-center mt-5 container' style="width: 60%;" action='/remove/book' method='POST'>
@@ -19,6 +19,6 @@
               {% endfor %}
           </select>
       </div>
-     <button class='btn btn-lg btn-primary btn-block' type='submit'>Submit</button>
+     <button class='btn btn-lg btn-dark btn-block' type='submit'>Remove</button>
  </form>
 {% endblock %}

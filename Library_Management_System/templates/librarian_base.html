@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang='en'>
+
+<head>
+
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
+    <link rel="icon" href="{{ url_for('static',filename='user.png')}}">
+</head>
+<title>{% block title %}{% endblock %}</title>
+
+
+</head>
+
+<body style="font-family: 'PT Sans', sans-serif;background-image: url(../static/bk.jpg);background-size: cover;">
+    <nav class="navbar navbar-expand-md navbar-dark" style="background-color: rgb(105, 68, 68); margin-bottom: 10px;">
+        <div class='container-fluid' id='navbarNav'>
+            <ul class='nav navbar-nav navbar-brand'>
+                <li class='nav-item'>
+                    <a class='navbar-brand' href="{{ url_for('main.librarian_dashboard') }}"><img src="{{ url_for('static',filename='alu_logo.png')}}"
+                            alt="alu logo" height="21px"> Librarian - {{ current_user.name }}</a>
+                </li>
+            </ul>
+            <ul class='nav navbar-nav ml-auto'>
+                <div class="input-group mb-1" style="width: 300px;">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa fa-search"></i></span>
+                    </div>
+                    <input type="search" class="form-control" placeholder="book info..." id="search" autofocus>
+                </div>
+                <li class='nav-item active ml-4'>
+                    <a class='nav-link' href='/add/book'>Add Book</a>
+                </li>
+                <li class='nav-item active ml-4'>
+                    <a class='nav-link' href='/remove/book'>Remove Book</a>
+                </li>
+                <li class='nav-item active ml-4'>
+                    <a class='nav-link' href='/lend/book'>Lend Book</a>
+                </li>
+                <li class='nav-item active ml-4'>
+                    <a class='nav-link' href='/return/book'>Return Book</a>
+                </li>
+                <li class='nav-item active ml-4'>
+                    <a class='nav-link' href='/logout'>Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container" style="color: white;text-shadow: 2px 2px 12px #000000;">
+        {% block content %}{% endblock %}
+    </div>
+
+
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js'></script>
+    <script src="{{ url_for('static',filename='script.js')}}"></script>    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+{% extends 'librarian_base.html' %}
+{% block title %}Lend Book{% endblock %}
+{% block content %}
+<form class='text-center mt-5 container' style="width: 60%;" action="/lend/book" method='POST'>
+    {% for message in get_flashed_messages() %}
+    <div class='alert alert-warning'>
+        <button type='button' class='close' data-dismiss='alert'>&times;</button>
+        {{message}}
+    </div>
+    {% endfor %}
+    <h1 class='display-4 text-center'>Lend Book</h1><br>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fa fa-book"></i></span>
+        </div>
+        <select name="book" class="form-control" required autofocus placeholder='Select'>
+            {% for book in books %}
+            {% if book.available_quantity == 0 %}
+            <option value='{{ book.id }}' name='book' style="color: #8b8989;" disabled>{{ book.name }} by {{ book.author }}</option>
+            {% elif request.args.get('book') == book.id %}
+            <option value='{{ book.id }}' name='book' selected>{{ book.name }} by {{ book.author }}</option>
+            {% else %}
+            <option value='{{ book.id }}' name='book'>{{ book.name }} by {{ book.author }}</option>
+            {% endif %}
+            {% endfor %}
+        </select>
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fa fa-user"></i></span>
+        </div>
+        <select name="user" class="form-control" required autofocus placeholder='Select'>
+            {% for user in users %}
+            <option value='{{ user.id }}' name='user'>{{ user.email }} ({{ user.name }})</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+        </div>
+        <input type="text" name="daterange" class="form-control" value="01/01/2022 - 01/15/2022" />
+    </div>
+    <button class='btn btn-lg btn-dark btn-block' type='submit'>Submit</button>
+</form>
+{% endblock %}

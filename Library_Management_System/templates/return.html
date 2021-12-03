@@ -1,4 +1,4 @@
-{% extends 'withlogin.html' %}
+{% extends 'librarian_base.html' %}
 {% block title %}Return Book{% endblock %}
 {% block content %}
 <form class='text-center mt-5 container' style="width: 60%;" action='/return/book' method='POST'>
@@ -14,12 +14,12 @@
             <span class="input-group-text"><i class="fa fa-book"></i></span>
         </div>
         <select name="book" class="form-control" required autofocus placeholder='Select'>
-            {% for book in books %}
-            <option value='{{ book.copies.id }}' name='book'>{{ book.copies.name }} by {{ book.copies.author }}</option>
+            {% for _, lend in books_obj.items() %}
+            <option value='{{ lend.lend_info.id }}' name='book'>{{ lend.book_info.name }} - user '{{ lend.user_info.email }}' - return date '{{ lend.lend_info.date_return }}'</option>
             {% endfor %}
         </select>
     </div>
 
-    <button class='btn btn-lg btn-primary btn-block' type='submit'>Submit</button>
+    <button class='btn btn-lg btn-dark btn-block' type='submit'>Return</button>
 </form>
 {% endblock %}
