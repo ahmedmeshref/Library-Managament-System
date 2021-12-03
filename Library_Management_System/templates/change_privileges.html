@@ -1,0 +1,24 @@
+{% extends 'admin_base.html' %}
+{% block title %}Change Privileges{% endblock %}
+{% block content %} 
+<form class='text-center mt-5 container' style="width: 60%;" action='/remove/user' method='POST'>
+     {% for message in get_flashed_messages() %}
+     <div class='alert alert-warning'>
+         <button type='button' class='close' data-dismiss='alert'>&times;</button>
+         {{message}}
+     </div>
+     {% endfor %}
+     <h1 class='display-4 text-center'>Change User Privileges</h1><br>
+     <div class="input-group mb-3">
+          <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fa fa-user"></i></span>
+          </div>
+          <select name="user" class="form-control" required autofocus placeholder='Select'>
+              {% for user in users %}
+              <option value='{{ user.id }}' name='user'>{{ user.email }} ({{ user.name }})</option>
+              {% endfor %}
+          </select>
+      </div>
+     <button class='btn btn-lg btn-dark btn-block' type='submit'>Remove</button>
+ </form>
+{% endblock %}
