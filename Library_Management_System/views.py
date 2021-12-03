@@ -131,7 +131,7 @@ class AdminView(MethodView):
     def post(self):
         email = request.form.get("email")
         password = request.form.get("password")
-        user = User.query.filter_by(email=email, admin=True).first()
+        user = User.query.filter(User.email==email, User.admin==True).first()
         if user and check_password_hash(user.password, password):
             login_user(user)
             if request.args.get("next"):

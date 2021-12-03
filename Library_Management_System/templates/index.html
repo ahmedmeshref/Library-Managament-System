@@ -1,0 +1,37 @@
+{% extends "withoutlogin.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+
+<div class="text-center mt-5 container">
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-warning">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{message}}
+    </div>
+    {% endfor %}
+    <h1 class="display-4">ALU Library Management System</h1>
+    <p class="lead">Library Full of Books For You!</p>
+    {% if books %}
+    <hr style="border: 3px solid white; border-radius: 5px;" />
+    <h1 class="display-4 text-center">All Books</h1>
+    <br>
+    <table class="table" style="color: #fff; background-color: rgb(105, 68, 68); box-shadow: #f1f1f1 0px 3px 8px;" id='data'>
+        <thead>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Copies Avaliable</th>
+        </thead>
+        <tbody>
+            {% for book in books %}
+            <tr>
+                <td scope="row">{{ book.id }}</td>
+                <td>{{ book.name }}</td>
+                <td>{{ book.available_quantity }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'withlogin.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+
+{% for message in get_flashed_messages() %}
+
+<div class='alert alert-warning'>
+     <button type='button' class='close' data-dismiss='alert'>&times;</button>
+     {{message}}
+</div>
+
+
+{% endfor %}
+{% if books_obj %}
+
+<div class=' text-center container-fluid'>
+
+     <h1 class='display-4 text-center mt-4'>Your Borrowed Books</h1><br>
+     <table class="table" style="color: #fff; background-color: rgb(105, 68, 68); box-shadow: #f1f1f1 0px 3px 8px;" id='data'>
+          <thead>
+               <th scope="col">#</th>
+               <th scope="col">Title</th>
+               <th scope="col">Author</th>
+               <th scope="col">Date borrowed</th>
+               <th scope="col">Date of Return</th>
+               <th scope="col">State</th>
+          </thead>
+          <tbody>
+               {% for ind, lend in books_obj.items() %}
+               <tr>
+                    <td scope='row'>{{ ind }}</td>
+                    <td>{{ lend.book_info.name }}</td>
+                    <td>{{ lend.book_info.author }}</td>
+                    <td>{{ lend.lend_info.date_added }}</td>
+                    <td>{{ lend.lend_info.date_return }}</td>
+                    {% if lend.lend_info.lent_state %}
+                    <td>Returned</td>
+                    {% else %}
+                    <td>Not Returned</td>
+                    {% endif %}
+               </tr>
+               {% endfor %}
+          </tbody>
+     </table>
+</div>
+{% else %}
+<h1 class='display-4 text-center'>No Borrowed Books!</h1><br>
+{% endif %}
+{% endblock %}
