@@ -14,11 +14,11 @@
      {% endif %}
      {% endwith %}
  </div>
-{% if books %}
+{% if books_obj %}
 
 <div class=' text-center container-fluid'>
 
-     <h1 class='display-4 text-center mt-4'>All Books</h1><br>
+     <h1 class='display-4 text-center mt-4'>All Borrowed Books</h1><br>
      <table class="table" style="color: #fff; background-color: rgb(105, 68, 68); box-shadow: #f1f1f1 0px 3px 8px;" id='data'>
           <thead>
                <th scope="col">#</th>
@@ -47,6 +47,6 @@
      </table>
 </div>
 {% else %}
-<h1 class='display-4 text-center'>No Borrowed Books!</h1><br>
+<h1 class='display-4 text-center'>No Borrowed Books Yet!</h1><br>
 {% endif %}
 {% endblock %}

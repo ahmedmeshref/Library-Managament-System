@@ -27,6 +27,7 @@
                <th scope="col">Description</th>
                <th scope="col">Total Copies</th>
                <th scope="col">Copies Avaliable</th>
+               <th scope="col">Update</th>
           </thead>
           <tbody>
                {% for book in books %}
@@ -37,6 +38,11 @@
                     <td>{{ book.description }}</td>
                     <td>{{ book.total_quantity }}</td>
                     <td>{{ book.available_quantity }}</td>
+                    <td>
+                         <a class="btn btn-dark" href="{{ url_for('main.update_book', book_id=book.id) }}">
+                              Update Book
+                          </a>
+                    </td>
                </tr>
                {% endfor %}
           </tbody>

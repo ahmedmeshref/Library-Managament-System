@@ -338,7 +338,32 @@ class ChangePrivilegesView(MethodView):
         user.librarian = librarian
         db.session.commit()
         flash("Privilege granted successfully!", "success")
-        return redirect(url_for("main.admin_dashboard"))
+        return redirect(url_for("main.admin_dashboard"))        
+
+
+@main.route("/book/<int:book_id>/update", methods=['GET', 'POST'])
+@login_required
+@requires_librarian
+def update_book(book_id):
+    book = Book.query.filter(Book.id == book_id).first()
+    if not book:
+        flash("No book with that id exists!", "danger")
+        return redirect(url_for("main.librarian_dashboard"))
+    if request.method == 'POST':
+        book_title = request.form.get("name")
+        copies = int(request.form.get("number"))
+        book_description = request.form.get("description")
+        book.title = book_title
+        book.description = book_description
+        book.total_quantity = copies
+        book.available_quantity += copies
+        db.session.commit()
+        flash(f"Book updated successfully!", "success")
+        db.session.close()
+        return redirect(url_for("main.librarian_dashboard"))
+    return render_template(
+            "update_book.html", book=book
+        )
 
 
 class LendBookView(MethodView):
@@ -371,8 +396,8 @@ class LendBookView(MethodView):
             flash("Same book is borrowed by the same user and not returned yet!", "danger")
             return redirect(url_for("main.librarian_dashboard"))
 
-        if return_date > date_added:
-            flash("Return date can't come before the lend date!", "danger")
+        if return_date < date_added:
+            flash("Return date should happen after the lend date!", "danger")
             return redirect(url_for("main.librarian_dashboard"))
 
         book.available_quantity -= 1
